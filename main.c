@@ -176,3 +176,36 @@ PlinkedList mergeLists(PlinkedList firstList, PlinkedList secondList)
     return mergedList;
 }
     
+
+void insertEndOfList(PlinkedList list, int element)
+{
+    NodePointer newNode;
+    
+    newNode = (NodePointer)malloc(sizeof(struct Node));
+
+    newNode->element = element;
+
+    if (list->head == NULL)
+    {
+        list->head = newNode;
+        list->tail = newNode;
+    }
+    else 
+    {
+        list->tail->next = newNode;
+        list->tail = newNode;
+    }
+    BubbleSort(list);
+}
+
+void printList(PlinkedList list)
+{
+    NodePointer currentNode = list->head;
+    
+    while (currentNode != NULL)
+    {
+        printf("%d ", currentNode->element);
+        currentNode = currentNode->next;
+    }
+    printf("\n");
+}
