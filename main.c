@@ -29,8 +29,10 @@ int main()
 // Helper Methods
 
 /*
-    describe the function here.
+    add this to methods and describe them here.
 */
+
+
 PlinkedList createEmptyList(void)
 {
     // create a new list and allocate memory for it.
@@ -79,4 +81,39 @@ void deleteList(PlinkedList List)
     }
 }
 
+void swapElements(NodePointer a, NodePointer b)
+{
+    // create a new temp element and assign it to the first element value
+    int temp = a->element;
+    // swap the elements values
+    a->element = b->element;
+    b->element = temp;
+}
 
+void BubbleSort(PlinkedList list)
+{
+    int swapped;
+    NodePointer currentNode;
+    NodePointer lastNode = NULL;
+
+    if (list == NULL)
+    {
+        printf("cannot sort list, empty list!.\n");
+        return;
+    }
+
+    do {
+        swapped = 0;
+        currentNode = list->head;
+
+        while (currentNode->next != lastNode)
+        {
+            if (currentNode->element > currentNode->next->element)
+            {
+                swapElements(currentNode, currentNode->next);
+                swapped = 1;
+            }
+        }
+        lastNode = currentNode;
+    } while(swapped)
+}
