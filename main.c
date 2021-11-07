@@ -115,5 +115,44 @@ void BubbleSort(PlinkedList list)
             }
         }
         lastNode = currentNode;
-    } while(swapped)
+    } while(swapped);
+}
+
+/*
+    one = [1, 3, 4]
+    two = [2, 7]
+
+    new0 = [1]
+    
+    to merge = [7]
+    
+    
+*/
+
+NodePointer merge(NodePointer firstNode, NodePointer secondNode)
+{
+    // create the 
+    NodePointer mergedNode = NULL;
+
+    if (firstNode == NULL)
+    {
+        return secondNode;
+    }
+    else if (secondNode == NULL)
+    {
+        return firstNode;
+    }
+
+    if (firstNode->element <= secondNode->element)
+    {
+        mergedNode = firstNode;
+        mergedNode->next = merge(firstNode->next, secondNode);
+    }
+    else
+    {
+        mergedNode = secondNode;
+        mergedNode->next = merge(firstNode, secondNode->next);
+    }
+
+    return mergedNode;
 }
