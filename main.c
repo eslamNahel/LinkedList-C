@@ -103,7 +103,7 @@ void BubbleSort(PlinkedList list)
     }
 
     do {
-        swapped = 0;
+        swapped     = 0;
         currentNode = list->head;
 
         while (currentNode->next != lastNode)
@@ -118,20 +118,8 @@ void BubbleSort(PlinkedList list)
     } while(swapped);
 }
 
-/*
-    one = [1, 3, 4]
-    two = [2, 7]
-
-    new0 = [1]
-    
-    to merge = [7]
-    
-    
-*/
-
 NodePointer merge(NodePointer firstNode, NodePointer secondNode)
 {
-    // create the 
     NodePointer mergedNode = NULL;
 
     if (firstNode == NULL)
@@ -145,14 +133,46 @@ NodePointer merge(NodePointer firstNode, NodePointer secondNode)
 
     if (firstNode->element <= secondNode->element)
     {
-        mergedNode = firstNode;
-        mergedNode->next = merge(firstNode->next, secondNode);
+        mergedNode          = firstNode;
+        mergedNode->next    = merge(firstNode->next, secondNode);
     }
     else
     {
-        mergedNode = secondNode;
-        mergedNode->next = merge(firstNode, secondNode->next);
+        mergedNode          = secondNode;
+        mergedNode->next    = merge(firstNode, secondNode->next);
     }
 
     return mergedNode;
 }
+
+PlinkedList mergeLists(PlinkedList firstList, PlinkedList secondList)
+{
+    NodePointer firstHead     = firstList->head;
+    NodePointer secondHead    = secondList->head;
+
+    PlinkedList mergedList;
+
+    if (firstHead == NULL)
+    {
+        mergedList->head = secondHead;
+        return mergedList;
+    }
+    else if (secondHead == NULL)
+    {
+        mergedList->head = firstHead;
+        return mergedList;
+    }
+
+    if (firstHead->element <= secondHead->element)
+    {
+        mergedList->head = firstHead;
+        mergedList->head->next = merge(firstHead->next, secondHead);
+    }
+    else
+    {
+        mergedList->head = secondHead;
+        mergedList->head->next = merge(firstHead, secondHead->next);
+    }
+    return mergedList;
+}
+    
