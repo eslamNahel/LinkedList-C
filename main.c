@@ -3,7 +3,6 @@
 
 
 // Components structs.
-
 typedef struct Node
 {
     int element;
@@ -17,22 +16,46 @@ typedef struct LinkedList
     PNode tail;
 }LinkedList, *PlinkedList;
 
-// main function
 
+// methods callers
+PlinkedList createEmptyList(void);
+void insertEndOfList(PlinkedList list, int element);
+void printList(PlinkedList list);
+void deleteList(PlinkedList List);
+PlinkedList mergeLists(PlinkedList firstList, PlinkedList secondList);
+
+
+// main function
 int main()
 {
-    
+    PlinkedList listOne, listTwo;
+    PlinkedList mergedList;
+
+    int element;
+    int size;
+
+    listOne = createEmptyList();
+    listTwo = createEmptyList();
+
+    mergedList = createEmptyList();
+
+    printf("Please enter the seize of your first list: ");
+    scanf("%d", &size);
+    printf("Your first list is of size %d. Now please enter your list elements: \n", size);
+    for (int i = 0; i < size; i++)
+    {
+        scanf("%d", &element);
+        insertEndOfList(listOne, element);
+    }
+    printf("your first list is: ");
+    printList(listOne);
+
+
     return 0;
 }
 
 
 // Helper Methods
-
-/*
-    add this to methods and describe them here.
-*/
-
-
 PlinkedList createEmptyList(void)
 {
     // create a new list and allocate memory for it.
@@ -81,6 +104,7 @@ void deleteList(PlinkedList List)
     }
 }
 
+
 void swapElements(NodePointer a, NodePointer b)
 {
     // create a new temp element and assign it to the first element value
@@ -90,13 +114,14 @@ void swapElements(NodePointer a, NodePointer b)
     b->element = temp;
 }
 
+
 void BubbleSort(PlinkedList list)
 {
     int swapped;
     NodePointer currentNode;
     NodePointer lastNode = NULL;
 
-    if (list == NULL)
+    if (list->head == NULL)
     {
         printf("cannot sort list, empty list!.\n");
         return;
@@ -113,10 +138,12 @@ void BubbleSort(PlinkedList list)
                 swapElements(currentNode, currentNode->next);
                 swapped = 1;
             }
+            currentNode = currentNode->next;
         }
         lastNode = currentNode;
     } while(swapped);
 }
+
 
 NodePointer merge(NodePointer firstNode, NodePointer secondNode)
 {
@@ -144,6 +171,7 @@ NodePointer merge(NodePointer firstNode, NodePointer secondNode)
 
     return mergedNode;
 }
+
 
 PlinkedList mergeLists(PlinkedList firstList, PlinkedList secondList)
 {
@@ -198,6 +226,7 @@ void insertEndOfList(PlinkedList list, int element)
     BubbleSort(list);
 }
 
+
 void printList(PlinkedList list)
 {
     NodePointer currentNode = list->head;
@@ -209,3 +238,4 @@ void printList(PlinkedList list)
     }
     printf("\n");
 }
+
