@@ -21,8 +21,7 @@ typedef struct LinkedList
 PlinkedList createEmptyList(void);
 void insertEndOfList(PlinkedList list, int element);
 void printList(PlinkedList list);
-void deleteList(PlinkedList List);
-PlinkedList mergeLists(PlinkedList firstList, PlinkedList secondList);
+NodePointer mergeLists(PlinkedList firstList, PlinkedList secondList);
 
 
 // main function
@@ -47,9 +46,23 @@ int main()
         scanf("%d", &element);
         insertEndOfList(listOne, element);
     }
-    printf("your first list is: ");
+    printf("Your first list is: ");
     printList(listOne);
 
+    printf("\nPlease enter the seize of your second list: ");
+    scanf("%d", &size);
+    printf("Your second list is of size %d. Now please enter your list elements: \n", size);
+    for (int i = 0; i < size; i++)
+    {
+        scanf("%d", &element);
+        insertEndOfList(listTwo, element);
+    }
+    printf("Your second list is: ");
+    printList(listTwo);
+
+    mergedList->head = mergeLists(listOne, listTwo);
+    printf("\nYour merged list is: ");
+    printList(mergedList);
 
     return 0;
 }
@@ -72,36 +85,6 @@ PlinkedList createEmptyList(void)
         printf("Couldn't create new list!\n");
     }
     return list;
-}
-
-
-void deleteList(PlinkedList List)
-{
-    /*
-    create two new nodes, one to hold the value of the current node
-    that we will free, and the other is a temp node to hold the value
-    of the next node we want to free
-    */
-    NodePointer currentNode, tempNode;
-    // assign the current node the head of the list
-    currentNode = List->head;
-    // delete the list by simply assigning the head to null.
-    List->head = NULL;
-
-    /*
-    we assigned the head to null, but the list is still in memory,
-    so we go through all the nodes and free them, starting from the head
-    we do this by using our current node and temp node.
-    */
-    while (currentNode != NULL)
-    {
-        // assign temp node to the next node in the list.
-        tempNode = currentNode->next;
-        // free the current node from memory.
-        free(currentNode);
-        // assign the current node to the next node.
-        currentNode = tempNode;
-    }
 }
 
 
@@ -173,7 +156,7 @@ NodePointer merge(NodePointer firstNode, NodePointer secondNode)
 }
 
 
-PlinkedList mergeLists(PlinkedList firstList, PlinkedList secondList)
+NodePointer mergeLists(PlinkedList firstList, PlinkedList secondList)
 {
     NodePointer firstHead     = firstList->head;
     NodePointer secondHead    = secondList->head;
@@ -183,12 +166,12 @@ PlinkedList mergeLists(PlinkedList firstList, PlinkedList secondList)
     if (firstHead == NULL)
     {
         mergedList->head = secondHead;
-        return mergedList;
+        return mergedList->head;
     }
     else if (secondHead == NULL)
     {
         mergedList->head = firstHead;
-        return mergedList;
+        return mergedList->head;
     }
 
     if (firstHead->element <= secondHead->element)
@@ -201,7 +184,7 @@ PlinkedList mergeLists(PlinkedList firstList, PlinkedList secondList)
         mergedList->head = secondHead;
         mergedList->head->next = merge(firstHead, secondHead->next);
     }
-    return mergedList;
+    return mergedList->head;
 }
     
 
