@@ -49,7 +49,7 @@ int main()
     printf("Your first list is: ");
     printList(listOne);
 
-    printf("\nPlease enter the seize of your second list: ");
+    printf("\nPlease enter the size of your second list: ");
     scanf("%d", &size);
     printf("Your second list is of size %d. Now please enter your list elements: \n", size);
     for (int i = 0; i < size; i++)
@@ -59,6 +59,7 @@ int main()
     }
     printf("Your second list is: ");
     printList(listTwo);
+
     mergeLists(listOne, listTwo, mergedList);
     printf("\nYour merged list is: ");
     printList(mergedList);
