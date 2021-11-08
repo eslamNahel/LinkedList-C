@@ -1,6 +1,6 @@
 
 # Linked Lists in C
-Hey there! This is just a quick, small file which holds some code on the implementation
+Hey there! This is just a quick, small file which holds some code on the of implementation
 LinkedLists in C. It basically takes two LinkedLists of numbers, sorts them
 using BubbleSort, then merges them into one third list.
 
