@@ -21,7 +21,7 @@ typedef struct LinkedList
 PlinkedList createEmptyList(void);
 void insertEndOfList(PlinkedList list, int element);
 void printList(PlinkedList list);
-NodePointer mergeLists(PlinkedList firstList, PlinkedList secondList);
+void mergeLists(PlinkedList firstList, PlinkedList secondList, PlinkedList toMerge);
 
 
 // main function
@@ -59,8 +59,7 @@ int main()
     }
     printf("Your second list is: ");
     printList(listTwo);
-
-    mergedList->head = mergeLists(listOne, listTwo);
+    mergeLists(listOne, listTwo, mergedList);
     printf("\nYour merged list is: ");
     printList(mergedList);
 
@@ -146,7 +145,7 @@ NodePointer merge(NodePointer firstNode, NodePointer secondNode)
         mergedNode          = firstNode;
         mergedNode->next    = merge(firstNode->next, secondNode);
     }
-    else
+    else 
     {
         mergedNode          = secondNode;
         mergedNode->next    = merge(firstNode, secondNode->next);
@@ -156,35 +155,33 @@ NodePointer merge(NodePointer firstNode, NodePointer secondNode)
 }
 
 
-NodePointer mergeLists(PlinkedList firstList, PlinkedList secondList)
+void mergeLists(PlinkedList firstList, PlinkedList secondList, PlinkedList toMerge)
 {
     NodePointer firstHead     = firstList->head;
     NodePointer secondHead    = secondList->head;
 
-    PlinkedList mergedList;
+    NodePointer mergedList;
 
     if (firstHead == NULL)
     {
-        mergedList->head = secondHead;
-        return mergedList->head;
+        mergedList = secondHead;
     }
     else if (secondHead == NULL)
     {
-        mergedList->head = firstHead;
-        return mergedList->head;
+        mergedList = firstHead;
     }
 
     if (firstHead->element <= secondHead->element)
     {
-        mergedList->head = firstHead;
-        mergedList->head->next = merge(firstHead->next, secondHead);
+        mergedList = firstHead;
+        mergedList->next = merge(firstHead->next, secondHead);
     }
     else
     {
-        mergedList->head = secondHead;
-        mergedList->head->next = merge(firstHead, secondHead->next);
+        mergedList = secondHead;
+        mergedList->next = merge(firstHead, secondHead->next);
     }
-    return mergedList->head;
+    toMerge->head = mergedList;
 }
     
 
