@@ -38,7 +38,7 @@ int main()
 
     mergedList = createEmptyList();
 
-    printf("Please enter the seize of your first list: ");
+    printf("Please enter the size of your first list: ");
     scanf("%d", &size);
     printf("Your first list is of size %d. Now please enter your list elements: \n", size);
     for (int i = 0; i < size; i++)
@@ -221,4 +221,3 @@ void printList(PlinkedList list)
     }
     printf("\n");
 }
-
